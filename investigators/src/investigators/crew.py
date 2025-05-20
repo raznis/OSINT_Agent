@@ -7,7 +7,7 @@ from crewai_tools import SerperDevTool
 @CrewBase
 class Investigators():
     """Investigators crew"""
-    
+
     #Agents
     agents_config = 'config/agents.yaml'
     
@@ -16,21 +16,23 @@ class Investigators():
         return Agent(
             config=self.agents_config['researcher'],
             verbose=True,
-            tools=[SerperDevTool()]
+            tools=[SerperDevTool()],
+            retry_on_fail=True,  # Enable retry
+            max_retries=3  # Set maximum retries
         )
 
     @agent
     def fincrime_analyst(self) -> Agent:
         return Agent(
             config=self.agents_config['fincrime_analyst'],
-            verbose=True,
+            verbose=False,
         )
     
     @agent
     def osint_reporter(self) -> Agent:
         return Agent(
             config=self.agents_config['osint_reporter'],
-            verbose=True,
+            verbose=False,
         )
 
     # Tasks

@@ -1,0 +1,9 @@
+crewai==0.120.1
+crewai-tools==0.45.0
+gradio==5.30.0
+gradio-client==1.10.1
+litellm==1.68.0
+markdown-it-py==3.0.0
+openai==1.75.0
+openai-agents==0.0.12
+uv==0.7.6

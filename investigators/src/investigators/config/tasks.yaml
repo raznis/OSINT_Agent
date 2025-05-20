@@ -7,11 +7,10 @@ research_target:
     Your research should focus on:
     1. Basic background information
     2. Professional history and business activities
-    3. Corporate structures and relationships
-    4. Public records and news mentions
-    5. Legal or regulatory issues
-    6. Unusual business patterns or inconsistencies
+    3. Public records and news mentions
+    4. Legal or regulatory issues
     
+    Run multiple searches until your findings are adequate. 
     Organize your findings clearly and be sure to track your sources.
   expected_output: >
     Comprehensive research findings on {target}

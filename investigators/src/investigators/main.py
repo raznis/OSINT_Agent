@@ -28,11 +28,11 @@ def run():
     #     # 'current_year': str(datetime.now().year)
     # }
 
-    inputs = {
-        'target': 'Igal Nissim',
-        'affiliations': 'Comverse, Verint',
-        # 'current_year': str(datetime.now().year)
-    }
+    # inputs = {
+    #     'target': 'Igal Nissim',
+    #     'affiliations': 'Comverse, Verint',
+    #     # 'current_year': str(datetime.now().year)
+    # }
 
     # inputs = {
     #     'target': 'Yeela Harel',
@@ -45,6 +45,12 @@ def run():
     #     'affiliations': 'Hapoalim Bank',
     #     # 'current_year': str(datetime.now().year)
     # }
+
+    inputs = {
+        'target': 'Bar Mittelman',
+        'affiliations': 'Bitin, crypto',
+        # 'current_year': str(datetime.now().year)
+    }
 
     try:
         Investigators().crew().kickoff(inputs=inputs)
