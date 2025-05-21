@@ -1,0 +1,84 @@
+research_target:
+  description: >
+    Research {target} ({affiliations}) thoroughly using available search tools:
+    
+    Name: {target}
+    
+    Your research should focus on:
+    1. Basic background information
+    2. Professional history and business activities
+    3. Public records and news mentions
+    4. Legal or regulatory issues
+    
+    Run multiple searches until your findings are adequate. 
+    Organize your findings clearly and be sure to track your sources.
+  expected_output: >
+    Comprehensive research findings on {target}
+  agent: researcher
+
+analyze_target:
+  description: >
+    Analyze the research findings on {target} to identify potential money laundering red flags. Focus only on {target} and not their affiliations. 
+    Ignore any sources that do not contain the full name of the target ({target}) at least once.
+
+    If relevant, analyze for the following reputational Red Flags:
+       - Negative news coverage related to financial crimes
+       - Past investigations or regulatory actions
+       - Association with politically exposed persons (PEPs)
+    
+    For each identified red flag, provide:
+    - A clear description
+    - Severity assessment (on a scale of 0.0 to 1.0)
+    - Supporting evidence
+    - Your reasoning
+    - Sources of information
+    
+    Structure your output in JSON format.
+    IMPORTANT: Output ONLY the raw JSON any markdown formatting, code block delimiters, or backticks.
+  expected_output: >
+    JSON-structured analysis of {target}'s potential money laundering red flags
+  agent: fincrime_analyst
+  context:
+    - research_target
+  output_file: output/analysis_output_{target}.json
+
+
+reporting_task:
+  description: >
+    Create a comprehensive intelligence report based on the following analysis
+    of potential money laundering red flags:
+    
+    Target Name: {target}
+    
+    Your report should include:
+    
+    1. Executive Summary
+       - Brief overview of the target
+       - Summary of key findings and risk assessment
+    
+    2. Target Profile
+       - Background information
+       - Known associates and relationships
+       - Business activities and corporate structure (if applicable)
+    
+    3. Red Flag Analysis
+       - Detailed examination of each identified red flag
+       - Supporting evidence and reasoning
+       - Risk severity assessment
+    
+    4. Overall Risk Assessment
+       - Holistic evaluation of money laundering risk
+       - Confidence level in findings
+       - Potential alternative explanations
+    
+    5. Recommendations
+       - Suggested next steps for investigation
+       - Additional intelligence gaps to address
+    
+    Format the report in a clear, professional structure with sections and subsections.
+  expected_output: >
+    Comprehensive intelligence report on money laundering risks, in Markdown.
+  agent: osint_reporter
+  context:
+    - analyze_target
+  output_file: output/osint_report_{target}.md
