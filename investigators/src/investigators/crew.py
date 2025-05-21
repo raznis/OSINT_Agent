@@ -1,8 +1,31 @@
+from typing import Tuple, Any
 from crewai import Agent, Crew, Process, Task
 from crewai.project import CrewBase, agent, crew, task
+from crewai import TaskOutput
 from crewai_tools import SerperDevTool
+from crewai_tools import ScrapeWebsiteTool
+from crewai_tools import BraveSearchTool
+NO_INFORMATION_FOUND="no information found"
 
+def validate_researcher_content(result: TaskOutput) -> Tuple[bool, Any]:
+    """Validate research content meets requirements."""
+    try:
+        # print("In validate_researcher_content...")
+        # Check word count
+        word_count = len(result.raw.split())
+        # print("Word Count:", word_count)
+        # print(result.raw)
 
+        if word_count < 100:
+            return (False, "Not enough content")
+
+        if NO_INFORMATION_FOUND in result.raw.lower():
+            return (False, "Model says that no information was found")
+
+        return (True, result)
+    except Exception as e:
+        print("The exception was:", e)
+        return (False, "Unexpected error during validation")
 
 @CrewBase
 class Investigators():
@@ -16,9 +39,9 @@ class Investigators():
         return Agent(
             config=self.agents_config['researcher'],
             verbose=True,
-            tools=[SerperDevTool()],
+            tools=[SerperDevTool(save_file=True)],
             retry_on_fail=True,  # Enable retry
-            max_retries=3  # Set maximum retries
+            max_retries=3,  # Set maximum retries
         )
 
     @agent
@@ -38,10 +61,15 @@ class Investigators():
     # Tasks
     tasks_config = 'config/tasks.yaml'
 
+    
+
     @task
     def research_target(self) -> Task:
+        
+        
         return Task(
             config=self.tasks_config['research_target'],
+            guardrail=validate_researcher_content,
         )
 
     @task
