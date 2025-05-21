@@ -177,3 +177,5 @@ cython_debug/
 output/*
 investigators/output/*
 search_results_2025*
+.DS_Store
+memory/*

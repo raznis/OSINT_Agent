@@ -9,6 +9,7 @@ researcher:
     finding and connecting information about people and businesses. You know how to
     follow information trails and identify valuable data sources.
     You have the ability to search the web using search tools.
+    You have the ability to use your memory to gather information.
   llm: openai/gpt-4o
 
 fincrime_analyst:

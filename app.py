@@ -58,15 +58,18 @@ with gr.Blocks() as view:
         outputs=output
     )
     
-
-    
     clear_btn.click(
         fn=clear_inputs,
         inputs=[],
         outputs=[name_input, affiliation_input]
     )
     gr.Examples(
-        examples=[["Raz Nissim", "Ben Gurion University, General Motors"]],
+        examples=[["Raz Nissim", "Ben Gurion University, General Motors"],
+                  ["Mohammed Mosharref Hossain", "Albany"], 
+                  ["Giovanni Cazzetta", "Montreal"],
+                  ["Willy Bokonga", "Congo"],
+                  ["Avraham Hirshzon", "Israel, Politician"],
+            ],
         inputs=[name_input, affiliation_input]
     )
 

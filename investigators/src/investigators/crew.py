@@ -5,6 +5,11 @@ from crewai import TaskOutput
 from crewai_tools import SerperDevTool
 from crewai_tools import ScrapeWebsiteTool
 from crewai_tools import BraveSearchTool
+
+from crewai.memory import LongTermMemory, EntityMemory
+from crewai.memory.storage.rag_storage import RAGStorage
+from crewai.memory.storage.ltm_sqlite_storage import LTMSQLiteStorage
+
 NO_INFORMATION_FOUND="no information found"
 
 def validate_researcher_content(result: TaskOutput) -> Tuple[bool, Any]:
@@ -93,4 +98,24 @@ class Investigators():
             tasks=self.tasks, # Automatically created by the @task decorator
             process=Process.sequential,
             verbose=True,
+            memory=True,
+            # Long-term memory for persistent storage across sessions
+            long_term_memory = LongTermMemory(
+                storage=LTMSQLiteStorage(
+                    db_path="./memory/long_term_memory_storage.db"
+                )
+            ),
+           # Entity memory for tracking key information about entities
+            entity_memory = EntityMemory(
+                storage=RAGStorage(
+                    embedder_config={
+                        "provider": "openai",
+                        "config": {
+                            "model": 'text-embedding-3-small'
+                        }
+                    },
+                    type="short_term",
+                    path="./memory/"
+                )
+            ),
         )
