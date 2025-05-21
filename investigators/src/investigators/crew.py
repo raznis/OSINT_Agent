@@ -1,6 +1,7 @@
 from crewai import Agent, Crew, Process, Task
 from crewai.project import CrewBase, agent, crew, task
 from crewai_tools import SerperDevTool
+from crewai_tools import BraveSearchTool
 
 
 
@@ -16,7 +17,7 @@ class Investigators():
         return Agent(
             config=self.agents_config['researcher'],
             verbose=True,
-            tools=[SerperDevTool()],
+            tools=[BraveSearchTool()],
             retry_on_fail=True,  # Enable retry
             max_retries=3  # Set maximum retries
         )
