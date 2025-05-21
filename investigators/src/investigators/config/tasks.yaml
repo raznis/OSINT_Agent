@@ -10,11 +10,13 @@ research_target:
     3. Public records and news mentions
     4. Legal or regulatory issues
     
-    Run multiple searches until your findings are adequate. 
+    Run multiple searches until your findings are adequate.
     Organize your findings clearly and be sure to track your sources.
+    If no information is found, just say "No information found.".
   expected_output: >
     Comprehensive research findings on {target}
   agent: researcher
+  output_file: output/research_{target}
 
 analyze_target:
   description: >
@@ -53,12 +55,12 @@ reporting_task:
     Your report should include:
     
     1. Executive Summary
-       - Brief overview of the target
+       - Overall risk assessment score [between 0.0 (no risk) to 1.0 (high risk)]
        - Summary of key findings and risk assessment
     
     2. Target Profile
        - Background information
-       - Known associates and relationships
+       - Known associates and relationships (if applicable)
        - Business activities and corporate structure (if applicable)
     
     3. Red Flag Analysis
@@ -81,4 +83,5 @@ reporting_task:
   agent: osint_reporter
   context:
     - analyze_target
+    - research_target
   output_file: output/osint_report_{target}.md
