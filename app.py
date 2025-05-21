@@ -50,7 +50,7 @@ with gr.Blocks() as view:
         
     
     with gr.Row():
-        output = gr.Markdown(label="Risk Assessment Report:")
+        output = gr.Markdown(label="Risk Assessment Report:", container=True, show_copy_button=True)
     
     submit_btn.click(
         fn=investigate, 
