@@ -18,7 +18,7 @@ def investigate(target_name, affiliations, progress=gr.Progress()):
 
 
 def clear_inputs():
-    return "", ""
+    return "", "", ""
     
 with gr.Blocks() as view:
     gr.Markdown("# OSINT Investigator")
@@ -35,7 +35,7 @@ with gr.Blocks() as view:
         
     
     with gr.Row():
-        output = gr.Markdown(label="Risk Assessment Report:", container=True, show_copy_button=True, min_height=50)
+        output = gr.Markdown(container=True, show_copy_button=True, min_height=100)
     
     submit_btn.click(
         fn=investigate, 
@@ -46,7 +46,7 @@ with gr.Blocks() as view:
     clear_btn.click(
         fn=clear_inputs,
         inputs=[],
-        outputs=[name_input, affiliation_input]
+        outputs=[name_input, affiliation_input, output]
     )
     gr.Examples(
         examples=[["Raz Nissim", "Ben Gurion University, General Motors"],
