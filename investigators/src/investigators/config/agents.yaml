@@ -10,7 +10,7 @@ researcher:
     follow information trails and identify valuable data sources.
     You have the ability to search the web using search tools.
     You have the ability to use your memory to gather information.
-  llm: openai/gpt-4o
+  llm: openai/gpt-4o-mini
 
 fincrime_analyst:
   role: >
