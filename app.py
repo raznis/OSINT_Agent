@@ -35,7 +35,7 @@ with gr.Blocks() as view:
         
     
     with gr.Row():
-        output = gr.Markdown(container=True, show_copy_button=True, min_height=100)
+        output = gr.Markdown(container=True, show_copy_button=False, min_height=100)
     
     submit_btn.click(
         fn=investigate, 
