@@ -10,6 +10,8 @@ from crewai.memory import LongTermMemory, EntityMemory
 from crewai.memory.storage.rag_storage import RAGStorage
 from crewai.memory.storage.ltm_sqlite_storage import LTMSQLiteStorage
 
+import gradio as gr
+
 NO_INFORMATION_FOUND="no information found"
 
 def validate_researcher_content(result: TaskOutput) -> Tuple[bool, Any]:
@@ -35,6 +37,8 @@ def validate_researcher_content(result: TaskOutput) -> Tuple[bool, Any]:
 @CrewBase
 class Investigators():
     """Investigators crew"""
+    def __init__(self, progress: gr.Progress):
+        self.progress = progress
 
     #Agents
     agents_config = 'config/agents.yaml'
@@ -66,27 +70,42 @@ class Investigators():
     # Tasks
     tasks_config = 'config/tasks.yaml'
 
-    
+    def callback_function(self, output: TaskOutput):
+        # print(f"""
+        #     Task completed!
+        #     Name: {output.name}
+        #     Agent: {output.agent}
+        #     Output: {output.raw}
+        # """)
+        if output.name == "research_target":
+            self.progress(0.4, "Finished gathering information, performing money laundering analysis..")
+        if output.name == "analyze_target":
+            self.progress(0.7, "Finished ML analysis, writing summary report..")
+        if output.name == "reporting_task":
+            self.progress(0.99, desc="Report completed")
 
     @task
     def research_target(self) -> Task:
         
-        
+
         return Task(
             config=self.tasks_config['research_target'],
             guardrail=validate_researcher_content,
+            callback=self.callback_function
         )
 
     @task
     def analyze_target(self) -> Task:
         return Task(
             config=self.tasks_config['analyze_target'], 
+            callback=self.callback_function
         )
     
     @task
     def reporting_task(self) -> Task:
         return Task(
             config=self.tasks_config['reporting_task'], 
+            callback=self.callback_function
         )
 
     @crew
