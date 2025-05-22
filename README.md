@@ -4,9 +4,9 @@ app_file: app.py
 sdk: gradio
 sdk_version: 5.30.0
 ---
-# OSINT_Agent
+# OSINT_Investigator
 
-**OSINT_Agent** is an Open Source Intelligence (OSINT) application designed to help identify potential money laundering red flags associated with individuals and businesses. It leverages the CrewAI framework for multi-agent collaboration, Brave MCP for web searches, and modern LLMs for analysis and reporting. The user interface is powered by Gradio, making it easy to deploy and use on platforms like Hugging Face Spaces.
+**OSINT_Investigator** is an Open Source Intelligence (OSINT) application designed to help identify potential money laundering red flags associated with individuals and businesses. It leverages the CrewAI framework for multi-agent collaboration, Serper API for web searches, and modern LLMs for analysis and reporting. The user interface is powered by Gradio, making it easy to deploy and use on platforms like Hugging Face Spaces.
 
 ## Features
 
@@ -18,14 +18,14 @@ sdk_version: 5.30.0
 
 ## Demo
 
-Try the live app on [Hugging Face Spaces](https://huggingface.co/spaces/raznis/OSINT_Agent) (if available).
+Try the live app on [Hugging Face Spaces](https://huggingface.co/spaces/raznis/OSINT_Investigator) (if available).
 
 ## Installation
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/raznis/OSINT_Agent.git
-   cd OSINT_Agent
+   git clone https://github.com/raznis/OSINT_Investigator.git
+   cd OSINT_Investigator
    ```
 
 2. **Install dependencies:**
